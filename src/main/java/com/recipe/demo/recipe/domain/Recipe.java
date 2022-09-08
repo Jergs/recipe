@@ -4,6 +4,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -144,5 +145,18 @@ public class Recipe {
         ingredient.setRecipe(this);
         this.ingredients.add(ingredient);
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Recipe)) return false;
+        Recipe recipe = (Recipe) o;
+        return Objects.equals(id, recipe.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
